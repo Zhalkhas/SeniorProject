@@ -101,8 +101,8 @@ but are outside the scope of the project for the time being.
 
 # Regarding the software stack for computer vision: 
 
-OpenCV is the most obvious choice of the backbone library as it carries plenty of algorithms (2500+). 
-Detectron 2 by Facebook is another open source project, and iit focuses specifically on object detection, segmentation and pose estimation.
+* _**OpenCV**_ is the most obvious choice of the backbone library as it carries plenty of algorithms (2500+). 
+* _**Detectron 2**_ by Facebook is another open source project, and iit focuses specifically on object detection, segmentation and pose estimation.
 
 # Regarding the hardware:
 
