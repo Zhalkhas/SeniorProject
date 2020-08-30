@@ -8,7 +8,6 @@ The software application is to be developed in several editions whose functional
 would gradually grow and change based on the performance of preceding editions
 and users' requirements.
 
-
 The software application would be delivered as both SaaS and as on-premises installations.
 On-premises installations would be delivered as SDKs (software development kit)
 to deliver minimum required performance as a standalone installation, and connections
@@ -84,11 +83,9 @@ of expertise that is outside the scope of this project.
 # What this project is NOT:
 
 1. Not about selling and installing video surveillance cameras and video management software.
-There is an existing ecosystem of companies (in many if not most countries) that sell and install
-IP cameras, 'previous generation' CCTV systems and accompanying software.
+There is an existing ecosystem of companies (in many if not most countries) that sell and install IP cameras, 'previous generation' CCTV systems and accompanying software.
 
-2. Not about building complete house/shop/warehouse security solutions that employ
-video surveillance, access control systems, etc.
+2. Not about building complete house/shop/warehouse security solutions that employ video surveillance, access control systems, etc.
 Building such solutions is by definition localized business activity that does not scale much.
 
 3. Not about developing and selling video management software.
@@ -102,55 +99,30 @@ crime recognition, reacting and countering, or counting the number of visitors/c
 At least not for now. The above mentioned video analytics examples are valid real-life use cases
 but are outside the scope of the project for the time being.
 
-
-===========================================================  
-
-
-Regarding the software stack for computer vision: 
+# Regarding the software stack for computer vision: 
 
 OpenCV is the most obvious choice of the backbone library as it carries plenty of algorithms (2500+). 
-
 Detectron 2 by Facebook is another open source project, and iit focuses specifically on object detection, segmentation and pose estimation.
 
-
-Regarding the hardware:
+# Regarding the hardware:
 
 This is a bit more complex. The application has to support:
 
-
 1. "Legacy / previous generation" CCTV cameras and DVRs that record and playback captured videos.
 
-Not sure whether video analytics can be performed on such videos real-time since those videos are not in a digital format,
-
-but face recognition most likely would be possible real time.
-
-
+Not sure whether video analytics can be performed on such videos real-time since those videos are not in a digital format, but face recognition most likely would be possible real time.
 Video analytics would have to be performed on a local computer/server in the background. 
-
 This is a fairly frequent scenario because there are plenty of existing video surveillance installations that are CCTV.
-
 
 2. IP cameras without embedded CPU/GPU, i.e. without built-in detection and recognition capabilities.
 
-This requires centralized video analytics on a server/local computer using a on-premises installation of the application or 
-
-installation of the application's core in the form of a SDK. 
-
-
+This requires centralized video analytics on a server/local computer using a on-premises installation of the application or installation of the application's core in the form of a SDK. 
 This is either the first or the second most frequent scenario, and it requires a fairly powerful GPU powered computer.
-
 
 3. Ideally, IP cameras with built-in detection and recognition capabilities that also generate metadata for the videos recorded.
 
-The "best" scenario that will probably occur quite rarely in real life though because such cameras are not as widespread and are more expensive.
-
-But I haven't done research on the cameras yet. . 
-
-
+The "best" scenario that will probably occur quite rarely in real life though because such cameras are not as widespread and are more expensive. But I haven't done research on the cameras yet.  
 Nvidia Jetson Nano seems to be the #1 option for a local small form factor DL-oriented computer (to be installed on clients' premises).
-
 It costs $150-170 and is more powerful than other similar devices by Intel and Google.
-
 And of course Nvidia 2080Ti GPUs will be required for training the models on desktops/servers during the development. 
-
 But overall nothing too fancy or exotic or too expensive as far as computers are concerned.
