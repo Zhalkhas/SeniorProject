@@ -1,7 +1,5 @@
-import express from 'express';
 import Config from './Config';
-
-const app = express();
+import app from './App';
 
 const start = async () => {
     app.listen(Config.EXPRESS_PORT, () => {
