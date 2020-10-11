@@ -4,14 +4,15 @@ import "./middlewares/passport-middleware";
 
 import passport from 'passport';
 import session from "express-session";
+import morgan from "morgan";
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan('combined'));
 app.use(session({secret: 's3cr3t'}));
 app.use(passport.initialize());
 app.use(passport.session());
-
 // Simple route middleware to ensure user is authenticated.
 // Use this route middleware on any resource that needs to be protected.  If
 // the request is authenticated (typically via a persistent login session),
