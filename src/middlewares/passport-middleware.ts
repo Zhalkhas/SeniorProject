@@ -1,28 +1,33 @@
-var passport = require('passport');
-var passportLocal = require('passport-local');
-var LocalStrategy = passportLocal.Strategy;
+import passport from 'passport';
+import passportLocal from 'passport-local';
+
+const LocalStrategy = passportLocal.Strategy;
+
 (function () {
     console.log("Init passportjs");
     passport.serializeUser(function (user: any, done: any) {
         console.log("serialize ", user);
-        done(null, user.id);
+        done(null, user);
     });
 
-    passport.deserializeUser(function (id: any, done: any) {
-        console.log("deserialize ", id);
-        done(null, { id: id, username: "admin", password: "admin" });
+    passport.deserializeUser(function (obj: any, done: any) {
+        console.log("deserialize ", obj);
+        done(null, obj);
     });
 
-    passport.use(new LocalStrategy({ passReqToCallback: true },
+    passport.use(new LocalStrategy({
+            session: true,
+            usernameField: "username",
+            passwordField: "password"
+        },
         (username: any, password: any, done: any) => {
             console.log("Authenticating ", username, password);
             if (username == "admin" && password == "admin") {
-                return done(null, { username: username, password: password });
+                return done(null, {username: username, password: password});
             } else {
-                return done(null, false, { message: "Invalid credentials" });
+                return done(null, false, {message: "Invalid credentials"});
             }
         }
     ));
     console.log("Init finished");
 })();
-
