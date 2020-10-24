@@ -19,7 +19,7 @@ app.use(passport.session());
 // the request will proceed.  Otherwise, the user will be redirected to the
 // login page.
 
-let authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
         return next();
     }

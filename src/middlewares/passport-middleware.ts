@@ -20,9 +20,9 @@ const LocalStrategy = passportLocal.Strategy;
             usernameField: "username",
             passwordField: "password"
         },
-        (username: any, password: any, done: any) => {
+        (username: string, password: string, done: any) => {
             console.log("Authenticating ", username, password);
-            if (username == "admin" && password == "admin") {
+            if (username === "admin" && password === "admin") {
                 return done(null, {username: username, password: password});
             } else {
                 return done(null, false, {message: "Invalid credentials"});
