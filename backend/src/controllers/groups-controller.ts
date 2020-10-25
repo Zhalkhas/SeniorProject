@@ -1,6 +1,6 @@
 import express from 'express';
 
-import GroupsService from '../services/GroupsService';
+import GroupsService from '../services/groups-service';
 import Group from '../models/Group.model';
 
 const router = express.Router();
