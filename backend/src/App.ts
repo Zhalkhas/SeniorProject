@@ -1,48 +1,19 @@
-import express, {NextFunction, Request, Response} from 'express';
+import express from 'express';
 
-import "./middlewares/passport-middleware";
+import initMiddlewares from './middlewares/init';
 
-import passport from 'passport';
-import session from "express-session";
-import morgan from "morgan";
+import GroupsController from './controllers/groups-controller';
+import AuthController from './controllers/auth-controller';
+
+const apiRootRouter = express.Router();
 
 const app = express();
 
-app.use(express.json());
-app.use(morgan('combined'));
-app.use(session({secret: 's3cr3t'}));
-app.use(passport.initialize());
-app.use(passport.session());
-// Simple route middleware to ensure user is authenticated.
-// Use this route middleware on any resource that needs to be protected.  If
-// the request is authenticated (typically via a persistent login session),
-// the request will proceed.  Otherwise, the user will be redirected to the
-// login page.
+initMiddlewares(app);
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    if (req.user) {
-        console.log(req.user);
-    } else {
-        console.log('user not found');
-    }
-    res.sendStatus(401);
-}
+apiRootRouter.use('/auth', AuthController);
+apiRootRouter.use('/groups', GroupsController);
 
-app.get('/',
-    authMiddleware,
-    (req, res) => {
-        res.json({"res": "hi"});
-    })
-
-app.get('/login',
-    passport.authenticate('local', {
-        session: true,
-    },), ((req, res) => {
-        res.sendStatus(200);
-    })
-);
+app.use('/api', apiRootRouter);
 
 export default app;
