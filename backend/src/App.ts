@@ -2,18 +2,18 @@ import express from 'express';
 
 import initMiddlewares from './middlewares/init';
 
-import passport from 'passport';
+import GroupsController from './controllers/groups-controller';
+import AuthController from './controllers/auth-controller';
+
+const apiRootRouter = express.Router();
 
 const app = express();
 
 initMiddlewares(app);
 
-app.get('/login',
-    passport.authenticate('local', {
-        session: true,
-    },), ((req, res) => {
-        res.sendStatus(200);
-    })
-);
+apiRootRouter.use('/auth', AuthController);
+apiRootRouter.use('/groups', GroupsController);
+
+app.use('/api', apiRootRouter);
 
 export default app;
