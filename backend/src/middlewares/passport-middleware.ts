@@ -1,5 +1,6 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
+import {NextFunction, Request, Response} from 'express';
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -31,3 +32,17 @@ const LocalStrategy = passportLocal.Strategy;
     ));
     console.log("Init finished");
 })();
+
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    if (req.user) {
+        console.log(req.user);
+    } else {
+        console.log('user not found');
+    }
+    res.sendStatus(401);
+}
+
+export default authMiddleware;
