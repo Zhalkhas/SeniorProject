@@ -13,8 +13,22 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const groupData = req.body;
     try {
-        const result = await GroupsService.createAGroup(groupData);
+        const result = await GroupsService.createGroup(groupData);
         res.json(result);
+    } catch (err) {
+        console.error(err.stack);
+        res.status(400).send(err.message);
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) return res.sendStatus(400);
+
+    try {
+        await GroupsService.deleteGroup(id);
+        res.sendStatus(200);
     } catch (err) {
         console.error(err.stack);
         res.status(400).send(err.message);
