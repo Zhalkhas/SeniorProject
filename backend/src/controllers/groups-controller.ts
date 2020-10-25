@@ -10,4 +10,15 @@ router.get('/', async (req, res) => {
     res.json(groups);
 });
 
+router.post('/', async (req, res) => {
+    const groupData = req.body;
+    try {
+        const result = await GroupsService.createAGroup(groupData);
+        res.json(result);
+    } catch (err) {
+        console.error(err.stack);
+        res.status(400).send(err.message);
+    }
+});
+
 export default router;
