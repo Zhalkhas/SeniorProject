@@ -8,6 +8,7 @@ const db = new Sequelize(
     Config.DB_PASSWORD, {
         host: Config.DB_HOST,
         dialect: 'postgres',
+        logging: false,
     },
 );
 
