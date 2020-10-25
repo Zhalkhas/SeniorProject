@@ -1,6 +1,7 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import {NextFunction, Request, Response} from 'express';
+import User from '../models/User.model';
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -21,20 +22,26 @@ const LocalStrategy = passportLocal.Strategy;
             usernameField: "username",
             passwordField: "password"
         },
-        (username: string, password: string, done: any) => {
+        async (username: string, password: string, done: any) => {
             console.log("Authenticating ", username, password);
-            if (username === "admin" && password === "admin") {
+            let user = await User.findOne({where: {login: username}});
+            if (user && user.getDataValue('password') === password) {
                 return done(null, {username: username, password: password});
             } else {
+                console.log("user not found");
                 return done(null, false, {message: "Invalid credentials"});
             }
+
         }
     ));
     console.log("Init finished");
 })();
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated()) {
+    //TODO: fix regex
+    console.log("base URL ", req.url.search('^/api/auth/login'));
+    if (req.isAuthenticated() || req.url.search('^/api/auth/login') === 0) {
+        console.log("next");
         return next();
     }
     if (req.user) {
