@@ -1,18 +1,17 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import {NextFunction, Request, Response} from 'express';
+import UserService from '../services/user-service';
 
 const LocalStrategy = passportLocal.Strategy;
 
 (function () {
     console.log("Init passportjs");
     passport.serializeUser(function (user: any, done: any) {
-        console.log("serialize ", user);
         done(null, user);
     });
 
     passport.deserializeUser(function (obj: any, done: any) {
-        console.log("deserialize ", obj);
         done(null, obj);
     });
 
@@ -21,26 +20,29 @@ const LocalStrategy = passportLocal.Strategy;
             usernameField: "username",
             passwordField: "password"
         },
-        (username: string, password: string, done: any) => {
+        async (username: string, password: string, done: any) => {
             console.log("Authenticating ", username, password);
-            if (username === "admin" && password === "admin") {
+            if (await UserService.checkPassword(username, password)) {
                 return done(null, {username: username, password: password});
             } else {
+                console.log("User not found in db");
                 return done(null, false, {message: "Invalid credentials"});
             }
+
         }
     ));
     console.log("Init finished");
 })();
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated()) {
+    //TODO: fix regex
+    if (req.isAuthenticated() || req.url.search('^/api/auth/login') === 0) {
         return next();
     }
     if (req.user) {
-        console.log(req.user);
+        console.log(req.user, " logged in");
     } else {
-        console.log('user not found');
+        console.log('User isn\'t authenticated');
     }
     res.sendStatus(401);
 }
