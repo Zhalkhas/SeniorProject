@@ -4,6 +4,7 @@ import session from 'express-session';
 import passport from 'passport';
 
 import authMiddleware from './passport-middleware';
+import corsMiddleware from './cors-middleware';
 
 export default (app: Express) => {
     app.use(express.json());
@@ -17,4 +18,5 @@ export default (app: Express) => {
     app.use(passport.session());
 
     app.use(authMiddleware);
+    app.use(corsMiddleware);
 };
