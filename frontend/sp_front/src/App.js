@@ -1,12 +1,10 @@
-import './App.css';
+import './styles.scss';
 import Authorization from './Components/Authorization.js'
 
 
 function App() {
   return (
-    <div>
-      <Authorization />
-    </div>
+    <Authorization />
   );
 }
 

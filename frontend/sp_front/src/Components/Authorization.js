@@ -8,22 +8,12 @@ function Authorization() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    /*useEffect(() => {
-        
-    }, [])*/
-
     function submitForm(e) {
         e.preventDefault()
 
-        const newURL = baseURL + "/api/auth/login?username=admin&password=admin"
-        console.log(newURL)
+        const URL = baseURL + `/api/auth/login?username=${username}&password=${password}`
 
-        axios.get(newURL, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-        })
+        axios.get(URL)
             .then(response => {
                 console.log(response)
             })
@@ -31,19 +21,19 @@ function Authorization() {
                 console.log(error)
             })
 
+        console.log(URL)
         console.log({username})
         console.log({password})
     }
 
     return (
-        <div className="Auth">
-            <div>
-                <form onSubmit={submitForm}>
-                    <input type="text" id="username" onChange={e => setUsername(e.target.value)} placeholder="Username"></input>
-                    <input type="password" id="password" onChange={e => setPassword(e.target.value)} placeholder="Password"></input>
-                    <input type="submit"></input>
-                </form>
-            </div>
+        <div className="auth">
+            <form onSubmit={submitForm}>
+                <h1>Authorization</h1>
+                <input type="text" id="username" onChange={e => setUsername(e.target.value)} placeholder="Username"></input>
+                <input type="password" id="password" onChange={e => setPassword(e.target.value)} placeholder="Password"></input>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     ) 
 }
