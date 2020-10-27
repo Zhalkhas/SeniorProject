@@ -23,10 +23,6 @@ function Authorization() {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            proxy: {
-                host: '172.17.0.1',
-                port: 8888
-            }
         })
             .then(response => {
                 console.log(response)
