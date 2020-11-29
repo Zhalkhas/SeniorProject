@@ -251,7 +251,7 @@ html, body, #root {
 	}
 }
 
-.cameras {
+.object {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -347,6 +347,81 @@ html, body, #root {
 
 			button {
 				width: 200px;
+			}
+		}
+	}
+}
+
+.edit {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: #303338;
+
+	.item {
+		margin-top: 70px;
+	}
+
+	button {
+		align-self: flex-end;
+		border: none;
+		background: $auth-color;
+		cursor: pointer;
+		border-radius: 3px;
+		padding: 6px;
+		margin: 10px 10px 0 0;
+		width: 100px;
+		color: white;
+		margin-left: 25px;
+		outline: none;
+		box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
+
+		&:hover { 
+			transform: translateY(-3px);
+			box-shadow: 0 6px 6px 0 rgba(0,0,0,0.2);
+		}
+	}
+
+	h1 {
+		color: white;
+		background-color: $auth-color;
+		margin: 0 auto;
+		text-align: center;
+		width: 500px;
+		height: 60px;
+		padding-top: 20px;
+		border-radius: 10px 10px 0 0;
+	}
+
+	.box {
+		display: flex;
+		flex-direction: column;
+		background-color: #FFFFE0;
+		width: 500px;
+		height: 300px;
+		justify-content: space-around;
+		align-items: center;
+		margin: auto;
+		border-radius: 0 0 10px 10px;
+	}
+
+	.input-box {
+		display: flex;
+		flex-direction: column;
+
+		.input {
+			margin-top: 40px;
+			width: 400px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			label {
+				text-align: right;
+			}
+
+			input {
+				height: 30px;
 			}
 		}
 	}

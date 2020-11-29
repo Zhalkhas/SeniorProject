@@ -13,7 +13,7 @@ function Groups() {
     ]
 
     return (
-        <div className="cameras">
+        <div className="object">
             <button>Menu</button>
             <div className="item">
                 <h1>Groups</h1>

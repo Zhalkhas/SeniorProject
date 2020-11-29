@@ -11,7 +11,7 @@ function Persons() {
     ]
 
     return (
-        <div className="persons">
+        <div className="object">
             <button>Menu</button>
             <div className="item">
                 <h1>Persons</h1>
