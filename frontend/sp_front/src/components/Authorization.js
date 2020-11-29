@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const baseURL = "http://localhost:8888"
@@ -21,9 +20,9 @@ function Authorization() {
                 console.log(error)
             })
 
-        console.log(URL)
-        console.log({username})
-        console.log({password})
+        // console.log(URL)
+        // console.log({username})
+        // console.log({password})
     }
 
     return (
