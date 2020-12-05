@@ -1,4 +1,5 @@
-import React from 'react'
+import { React, useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 
 function Menu() {
 
@@ -11,17 +12,25 @@ function Menu() {
         "Configure": "/assets/configuration.svg"
     }
 
+    const [logged, setLogged] = useState(true)
+
+    function logout() {
+        setLogged(false)
+    }
+
     return (
         <div className="menu">
-            <button>Logout</button>
+            {logged ? <button onClick={logout}>Logout</button> : <Redirect to="" />}
             <h1>Menu</h1>
             <div className="box">
                 {Object.entries(items).map(([key, value]) => {
                     return(
-                        <div className="item">
-                            <img src={value} width="80" height="80"></img>
-                            <p>{key}</p>
-                        </div>
+                        <Link to={key.toLowerCase()} style={{textDecoration: "none"}}>
+                            <div className="item">
+                                <img src={value} width="80" height="80"></img>
+                                <p>{key}</p>
+                            </div>
+                        </Link>
                     )
                 })}
             </div>

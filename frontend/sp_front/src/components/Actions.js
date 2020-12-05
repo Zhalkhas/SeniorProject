@@ -1,14 +1,16 @@
-import React from 'react'
+import { React, useState } from 'react'
 
 function Actions() {
 
-    const persons = [
+    const [delWord, setdelWord] = useState("")
+
+    const [actions, setActions] = useState([
         "Call Police",
         "Alert Manager",
         "Alert Security",
         "Turn on Main Lights",
         "Turn on Back Lot Lights",
-    ]
+    ])
 
     return (
         <div className="object">
@@ -19,9 +21,9 @@ function Actions() {
                     <div className="list-box">
                         <h3>Action List</h3>
                         <ul>
-                            {persons.map(person => {
+                            {actions.map(action => {
                                 return (
-                                    <li><div>{person}</div></li>
+                                    <li><a style={{cursor: "pointer"}} onClick={() => {setdelWord(action)}}>{action}</a></li>
                                 )
                             })}
                         </ul>
@@ -29,7 +31,7 @@ function Actions() {
                     <div className="buttons-box">
                         <button>Add new action</button>
                         <button>Edit action</button>
-                        <button>Delete action</button>
+                        <button onClick={() => {setActions(actions.filter(word => word !== delWord))}}>Delete action</button>
                     </div>
                 </div>
                 <button id="done">Done</button>
