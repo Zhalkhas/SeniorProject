@@ -5,6 +5,7 @@ import Person, {init as initPersonModel} from './Person.model';
 import Rule, {init as initRuleModel} from './Rule.model';
 import RulesToCamerasModel, {init as initRulesToCamerasModel} from './RulesToCameras.model';
 import Camera, {init as initCameraModel} from './Camera.model';
+import Action, {init as initActionModel} from './Action.model';
 
 import userMigrations from '../migrations/User.migrations';
 
@@ -14,6 +15,7 @@ export default async (db: Sequelize) => {
     initRuleModel(db);
     initCameraModel(db);
     initRulesToCamerasModel(db);
+    initActionModel(db);
 
     setupAssociations();
 
@@ -29,6 +31,7 @@ const setupAssociations = () => {
     Rule.belongsToMany(Camera, { through: RulesToCamerasModel });
     Camera.belongsToMany(Rule, { through: RulesToCamerasModel });
 
-    // TODO: Rule is missing action
+    Rule.belongsTo(Action);
+    Action.hasMany(Rule);
     // TODO: RulesToDays table
 };
