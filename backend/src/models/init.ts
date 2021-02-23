@@ -42,5 +42,4 @@ const setupAssociations = () => {
 
     Rule.belongsToMany(Weekday, { through: RuleActiveDayAndTime });
     Weekday.belongsToMany(Rule, { through: RuleActiveDayAndTime });
-    // TODO: RulesToDays table
 };
