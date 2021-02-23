@@ -1,20 +1,16 @@
 import {DataTypes, Model, Sequelize} from 'sequelize';
 
-export default class Person extends Model {};
+export default class Camera extends Model {};
 
 export const init = (sequelize: Sequelize) => {
-    Person.init({
-        firstName: {
+    Camera.init({
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        lastName: {
+        streamURL: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        imagePath: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
     }, {sequelize});
-}
+};
