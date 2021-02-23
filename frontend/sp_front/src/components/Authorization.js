@@ -12,23 +12,23 @@ function Authorization() {
     function submitForm(e) {
         e.preventDefault()
 
-        // const URL = baseURL + `/api/auth/login?username=${username}&password=${password}`
+        const URL = baseURL + `/api/auth/login?username=${username}&password=${password}`
 
-        // axios.get(URL)
-        //     .then(response => {
-        //         console.log(response)
+        axios.get(URL)
+            .then(response => {
+                console.log(response)
 
-        //         setAuth(true)
+                setAuth(true)
 
-        //         console.log(auth);
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+                console.log(auth);
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
-        if (username === "admin" && password === "admin") {
-            setAuth(true)
-        }
+        // if (username === "admin" && password === "admin") {
+        //     setAuth(true)
+        // }
     }
 
     return (
