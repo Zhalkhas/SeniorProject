@@ -1,7 +1,7 @@
 import {Model, Sequelize} from 'sequelize';
 
-export default class RulesToCamerasModel extends Model {};
+export default class RulesToCameras extends Model {};
 
 export const init = (sequelize: Sequelize) => {
-    RulesToCamerasModel.init({}, {sequelize});
+    RulesToCameras.init({}, {sequelize});
 };
