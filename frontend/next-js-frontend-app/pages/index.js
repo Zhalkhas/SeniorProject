@@ -1,68 +1,48 @@
-import { React, useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+// import { Redirect } from 'react-router-dom'
 
-function imageUpload() {
+const baseURL = "http://localhost:8888"
 
-  const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')
+function Authorization() {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [auth, setAuth] = useState(false)
+    const router = useRouter()
 
-  const upload = (e) => {
-    const reader = new FileReader();
+    function submitForm(e) {
+        e.preventDefault()
 
-    reader.onload = () => {
-      // if(reader.readyState === 2) {
-      //   setImage(reader.result)
-      // }
-      reader.readyState === 2 && setImage(reader.result)
+        const URL = baseURL + `/api/auth/login?username=${username}&password=${password}`
+
+        // axios.get(URL)
+        //     .then(response => {
+        //         console.log(response)
+
+        //         setAuth(true)
+
+        //         console.log(auth);
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
+        if (username === "admin" && password === "admin") {
+            setAuth(true)
+        }
     }
 
-    reader.readAsDataURL(e.target.files[0])
-  }
-
-  return(
-    <div>
-      <h1>Upload image</h1>
-      <img accept="image/*" src={image}></img>
-      <input type='file' onChange={upload}></input>
-    </div>
-  )
+    return (
+        <div className="auth">
+            <form onSubmit={submitForm}>
+                <h1>Authorization</h1>
+                <input type="text" id="username" onChange={e => setUsername(e.target.value)} placeholder="Username"></input>
+                <input type="password" id="password" onChange={e => setPassword(e.target.value)} placeholder="Password"></input>
+                {<button type="submit" onClick={() => {router.push('/menu')}}>Submit</button>}
+            </form>
+        </div>
+    ) 
 }
 
-export default imageUpload;
-
-// import React, { Component } from 'react';
-// import './App.css';
-// export class App extends Component {
-//   state={
-//     profileImg:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-//   }
-//   imageHandler = (e) => {
-//     const reader = new FileReader();
-//     reader.onload = () =>{
-//       if(reader.readyState === 2){
-//         this.setState({profileImg: reader.result})
-//       }
-//     }
-//     reader.readAsDataURL(e.target.files[0])
-//   };
-// 	render() {
-//     const { profileImg} = this.state
-// 		return (
-// 			<div className="page">
-// 				<div className="container">
-// 					<h1 className="heading">Add your Image</h1>
-// 					<div className="img-holder">
-// 						<img src={profileImg} alt="" id="img" className="img" />
-// 					</div>
-// 					<input type="file" accept="image/*" name="image-upload" id="input" onChange={this.imageHandler} />
-// 					<div className="label">
-//           <label className="image-upload" htmlFor="input">
-// 						<i className="material-icons">add_photo_alternate</i>
-// 						Choose your Photo
-// 					</label>
-//           </div>
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-// }
-
-// export default App;
+export default Authorization
