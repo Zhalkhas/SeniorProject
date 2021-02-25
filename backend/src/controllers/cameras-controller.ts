@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const personData = req.body;
+    const cameraData = req.body;
     try {
         const result = await CameraService.createCamera(personData);
         res.json(result);
