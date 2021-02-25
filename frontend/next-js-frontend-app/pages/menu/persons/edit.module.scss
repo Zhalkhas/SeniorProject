@@ -1,0 +1,33 @@
+.container {
+    background-color: #303338;
+}
+
+.photo {
+    width: 150px;
+    height: 200px;
+    margin: 20px;
+}
+
+.info_box {
+    display: flex;
+    flex-direction: row;
+}
+
+.info_text {
+    padding: 20px;
+}
+
+.camera_box {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.single_camera {
+    background-color: aquamarine;
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}

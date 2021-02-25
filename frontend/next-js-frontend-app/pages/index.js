@@ -39,7 +39,7 @@ function Authorization() {
                 <h1>Authorization</h1>
                 <input type="text" id="username" onChange={e => setUsername(e.target.value)} placeholder="Username"></input>
                 <input type="password" id="password" onChange={e => setPassword(e.target.value)} placeholder="Password"></input>
-                {<button type="submit" onClick={() => {router.push('/menu')}}>Submit</button>}
+                <button type="submit" onClick={() => {router.push('/menu')}}>Submit</button>
             </form>
         </div>
     ) 
