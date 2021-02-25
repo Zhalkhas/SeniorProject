@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const cameraData = req.body;
     try {
-        const result = await CameraService.createCamera(personData);
+        const result = await CameraService.createCamera(cameraData);
         res.json(result);
     } catch (err) {
         console.error(err);
