@@ -1,0 +1,11 @@
+scanner:
+  workers: 50
+  # scan_period: 20
+  scan_period: 1
+  scan_subnet: "192.168.0.0/24"
+  dial_timeout: 2000
+  pathlist_file: "./pathlist.txt"
+server:
+  port: 3060
+db:
+  path_to_db: "./cameras.db"
