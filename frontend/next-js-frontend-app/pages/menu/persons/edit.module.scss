@@ -1,33 +1,159 @@
+$auth-color: #61dafb;
+
 .container {
-    background-color: #303338;
+  background-color: #303338;
+  height: 100vh;
+  padding: 20px;
 }
 
 .photo {
-    width: 150px;
-    height: 200px;
-    margin: 20px;
+  width: 200px;
+  height: 270px;
+  margin: 20px;
 }
 
 .info_box {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  padding: 30px;
+  background-color: white;
+  width: 1090px;
+  margin: auto;
 }
 
 .info_text {
-    padding: 20px;
+  padding: 20px;
+
+  p {
+    font-size: 25px;
+    color: $auth-color;
+  }
 }
 
 .camera_box {
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1090px;
+  margin: auto;
 }
 
 .single_camera {
-    background-color: aquamarine;
-    margin: 20px;
-    width: 200px;
-    height: 200px;
-    text-align: center;
+  // border: none;
+  // border-radius: 15px;
+  // background-color: $auth-color;
+  // margin: 20px;
+  // width: 200px;
+  // height: 200px;
+  text-align: center;
+}
+
+.camera_preview {
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.camera_header {
+  padding-bottom: 60px;
+  color: white;
+  background-color: $auth-color;
+  margin: 0 auto;
+  text-align: center;
+  width: 1090px;
+  height: 60px;
+  padding-top: 20px;
+}
+
+.person_header {
+  padding-bottom: 60px;
+  color: white;
+  background-color: $auth-color;
+  margin: 0 auto;
+  text-align: center;
+  width: 1090px;
+  height: 60px;
+  padding-top: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.rules_header {
+  padding-bottom: 60px;
+  color: white;
+  background-color: $auth-color;
+  margin: 0 auto;
+  text-align: center;
+  width: 1090px;
+  height: 60px;
+  padding-top: 20px;
+}
+
+.rules_box {
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 1090px;
+  margin: auto;
+  font-size: 25px;
+}
+
+.rule {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  border: none;
+  background: $auth-color;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
+  width: 120px;
+  color: white;
+  margin-left: 15px;
+  outline: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+.add_rule_button {
+  border: none;
+  background: $auth-color;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
+  width: 300px;
+  color: white;
+  margin: auto;
+  outline: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  }
 }
