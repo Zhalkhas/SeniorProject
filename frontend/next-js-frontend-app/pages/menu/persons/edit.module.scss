@@ -157,3 +157,25 @@ $auth-color: #61dafb;
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   }
 }
+
+.back_button {
+  align-self: flex-end;
+  border: none;
+  background: $auth-color;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
+  margin: 20px 20px 0 0;
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  margin-left: 25px;
+  outline: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+}

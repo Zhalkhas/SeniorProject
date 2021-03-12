@@ -50,7 +50,7 @@ function Authorization() {
             router.push('/menu');
           }}
         >
-          Submit
+          Log in
         </button>
       </form>
     </div>

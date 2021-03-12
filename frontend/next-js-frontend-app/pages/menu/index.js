@@ -31,7 +31,7 @@ function Menu() {
               <Link href={'/menu/' + key.toString().toLowerCase()}>
                 <a style={{ textDecoration: 'none' }}>
                   <div className='item'>
-                    <img src={value} alt='blank' width='80' height='80' />
+                    <img src={value} alt='blank' width='150' height='150' />
                     <p>{key}</p>
                   </div>
                 </a>
