@@ -17,5 +17,6 @@ apiRootRouter.use('/persons', PersonsController);
 apiRootRouter.use('/cameras', CamerasController);
 
 app.use('/api', apiRootRouter);
+app.use(express.json());
 
 export default app;
