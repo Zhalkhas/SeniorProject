@@ -1,6 +1,6 @@
 FROM golang:1.15
 
-RUN apt update && apt upgrade -y
+RUN apt update
 RUN apt install -y sqlite3
 
 WORKDIR /srv

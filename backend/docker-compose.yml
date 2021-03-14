@@ -19,5 +19,12 @@ services:
       SP_POSTGRES_HOST: postgres
     depends_on:
       - postgres
+      - scanner
     ports:
       - '127.0.0.1:8888:8888'
+  scanner:
+    build: ./scanner
+    image: sp-camera-scanner
+    container_name: sp-camera-scanner
+    ports:
+    - '127.0.0.1:3060:3060'

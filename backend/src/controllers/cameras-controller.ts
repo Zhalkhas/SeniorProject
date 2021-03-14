@@ -10,6 +10,11 @@ router.get('/', async (req, res) => {
     res.json(cameras);
 });
 
+router.get('/all', async (req, res) => {
+    const allCamerasURLs: String[] = await CameraService.getUnregisteredCameras();
+    res.json(allCamerasURLs);
+})
+
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
     if (!id) return res.sendStatus(400);

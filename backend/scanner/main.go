@@ -64,7 +64,6 @@ func (c *Env) cameraListHandler(rw http.ResponseWriter, r *http.Request) {
 		log.Printf("ERROR getting values from DB: %+v\n", err)
 		rw.WriteHeader(http.StatusInternalServerError)
 	}
-
 	b, err := json.Marshal(cameras)
 	if err != nil {
 		log.Printf("ERROR marshalling json: %+v\n", err)

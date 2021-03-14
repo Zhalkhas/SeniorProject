@@ -40,15 +40,14 @@ func (db *SQLiteDB) Put(camera IPCam) error {
 
 // GetAll returns all available cameras from SQLite
 func (db *SQLiteDB) GetAll() ([]IPCam, error) {
-	rows, err := db.dbConn.Query("SELECT ip, path FROM cameras")
+	rows, err := db.dbConn.Query("SELECT stream_url FROM cameras")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var cameras []IPCam
+	cameras:= make([]IPCam, 0)
 	for rows.Next() {
 		var camera IPCam
-
 		err = rows.Scan(&camera.StreamURL)
 		if err != nil {
 			return nil, err
