@@ -33,15 +33,7 @@ function EditPerson() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const [actions, _] = useState([
-    'Call Police',
-    'Alert Manager',
-    'Alert Security',
-    'Turn on Main Lights',
-    'Turn on Back Lot Lights',
-  ]);
-
-  const personInfo = (
+  const InfoSection = (
       <div>
           <p>
               First name: <input type="text" name="firstName" onChange={e => setFirstName(e.target.value)}/>
@@ -57,8 +49,20 @@ function EditPerson() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
+  const dataTemplate = () => {
+      return {
+          days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+              .map(day => { return { day, isActive: false, } }),
+          timeFrom: null,
+          timeTo: null,
+      };
+  }
+
   const ModalDalUshel = (
-    <RulesModal actions={actions} styles={styles} modal={modal} setModal={setModal} toggle={toggle} />
+    <RulesModal
+        styles={styles} modal={modal} setModal={setModal} toggle={toggle}
+        data={dataTemplate()}
+    />
   );
 
   async function savePerson() {
@@ -101,7 +105,7 @@ function EditPerson() {
       <button onClick={() => savePerson()} className={styles.button}>Save</button>
         <img className={styles.photo} src={defaultImage} />
         <div className={styles.info_text}>
-          <p>{personInfo}</p>
+          <p>{InfoSection}</p>
         </div>
       </div>
       <h1 className={styles.camera_header}>Cameras List</h1>
