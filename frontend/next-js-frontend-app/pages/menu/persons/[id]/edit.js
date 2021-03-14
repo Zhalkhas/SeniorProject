@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
-import styles from './edit.module.scss';
-import RulesModal from '../../../components/RulesModal';
+import styles from '../edit.module.scss';
+import RulesModal from '../../../../components/RulesModal';
 import Link from 'next/link';
 // import List from 'react-list-select/dist/list';
 // import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
