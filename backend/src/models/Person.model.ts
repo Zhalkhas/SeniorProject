@@ -12,9 +12,5 @@ export const init = (sequelize: Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        imagePath: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
     }, {sequelize});
 }
