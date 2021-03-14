@@ -10,6 +10,7 @@ const apiRootRouter = express.Router();
 
 const app = express();
 
+app.use(express.json());
 initMiddlewares(app);
 
 apiRootRouter.use('/auth', AuthController);
@@ -17,6 +18,5 @@ apiRootRouter.use('/persons', PersonsController);
 apiRootRouter.use('/cameras', CamerasController);
 
 app.use('/api', apiRootRouter);
-app.use(express.json());
 
 export default app;
