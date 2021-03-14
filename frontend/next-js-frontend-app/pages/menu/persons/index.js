@@ -34,20 +34,8 @@ function Persons({ persons }) {
             }}
             key={(selected) => selected}
           />
-          {/* <div className='list-box'>
-            <h3>Person List</h3>
-            <ul>
-              {persons.map((person) => {
-                return (
-                  <li>
-                    <div>{person}</div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div> */}
           <div className='buttons-box'>
-            <button>Add new person</button>
+            <button onClick={() => router.push('/menu/persons/-1/edit')}>Add new person</button>
             <button onClick={() => router.push(`/menu/persons/${currentPerson}/edit`)}>Edit person</button>
             <button>Delete person</button>
           </div>

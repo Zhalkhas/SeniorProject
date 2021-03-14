@@ -10,7 +10,6 @@ const apiRootRouter = express.Router();
 
 const app = express();
 
-app.use(express.json());
 initMiddlewares(app);
 
 apiRootRouter.use('/auth', AuthController);

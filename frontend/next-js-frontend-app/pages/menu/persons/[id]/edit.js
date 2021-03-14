@@ -2,33 +2,38 @@ import { React, useState } from 'react';
 import styles from '../edit.module.scss';
 import RulesModal from '../../../../components/RulesModal';
 import Link from 'next/link';
-// import List from 'react-list-select/dist/list';
-// import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function EditPerson() {
-  const default_image = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
-  // const router = useRouter();
 
-  const list_of_cameras = {
+  const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
+
+  const router = useRouter();
+
+  const listOfCameras = {
     url_1: 'camera 1',
     url_2: 'camera 2',
   };
 
-  const [list_of_rules, setList_of_rules] = useState({
-    rule_1: 'ne buhay Dolt',
-    rule_2: 'ne kuri Dolt',
-    rule_3: 'voobwe nichego ne delay Dolt',
-  });
+  const [rules, setRules] = useState([]);
 
-  const info = {
-    Name: 'skr',
-    Surname: 'bop',
-    Age: 21512,
-    Other: 'info',
-  };
+  const RulesSection = rules.map((rule, index) => (
+      <li key={index}>
+          <div className={styles.rule}>
+              <p>Rule: {rule}</p>
+              <div>
+                  <button className={styles.button}>Edit</button>
+                  <button className={styles.button} onClick={() => setRules([...rules.slice(0, index), ...rules.slice(index+1)]) }>Delete</button>
+              </div>
+          </div>
+      </li>
+  ));
 
-  const [actions, setActions] = useState([
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const [actions, _] = useState([
     'Call Police',
     'Alert Manager',
     'Alert Security',
@@ -36,26 +41,40 @@ function EditPerson() {
     'Turn on Back Lot Lights',
   ]);
 
-  const person_info = Object.entries(info).map(([key, value]) => {
-    return (
-      <p>
-        {key}: {value}
-      </p>
-    );
-  });
+  const personInfo = (
+      <div>
+          <p>
+              First name: <input type="text" name="firstName" onChange={e => setFirstName(e.target.value)}/>
+          </p>
+          <p>
+              Last name: <input type="text" name="lastName" onChange={e => setLastName(e.target.value)}/>
+          </p>
+      </div>
+  );
 
   // modals state
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const Modal_dal_ushel = (
+  const ModalDalUshel = (
     <RulesModal actions={actions} styles={styles} modal={modal} setModal={setModal} toggle={toggle} />
   );
 
+  async function savePerson() {
+      const response = await axios.post('http://localhost:8888/api/persons', {
+          firstName,
+          lastName,
+      });
+
+      if (response.status === 200) {
+          await router.push('/menu/persons');
+      }
+  }
+
   // map cameras
 
-  const mapped_cameras = Object.entries(list_of_cameras).map(([key, value]) => {
+  const mappedCameras = Object.entries(listOfCameras).map(([key, value]) => {
     // допустим тут запрос-мапрос
 
     return (
@@ -72,22 +91,6 @@ function EditPerson() {
     );
   });
 
-  const mapped_rules = Object.entries(list_of_rules).map(([key, value]) => {
-    return (
-      <li key={key}>
-        <div className={styles.rule}>
-          <p>
-            {key}: {value}
-          </p>
-          <div>
-            <button className={styles.button}>Edit</button>
-            <button className={styles.button}>Delete</button>
-          </div>
-        </div>
-      </li>
-    );
-  });
-
   return (
     <div className={styles.container}>
       <Link href='/menu/persons'>
@@ -95,20 +98,21 @@ function EditPerson() {
       </Link>
       <h1 className={styles.person_header}>Person Info</h1>
       <div className={styles.info_box}>
-        <img className={styles.photo} src={default_image} />
+      <button onClick={() => savePerson()} className={styles.button}>Save</button>
+        <img className={styles.photo} src={defaultImage} />
         <div className={styles.info_text}>
-          <p>{person_info}</p>
+          <p>{personInfo}</p>
         </div>
       </div>
       <h1 className={styles.camera_header}>Cameras List</h1>
-      <div className={styles.camera_box}>{mapped_cameras}</div>
+      <div className={styles.camera_box}>{mappedCameras}</div>
       <h1 className={styles.rules_header}>Rules List</h1>
       <div className={styles.rules_box}>
-        <ul>{mapped_rules}</ul>
+        <ul>{RulesSection}</ul>
         <button className={styles.add_rule_button} onClick={toggle}>
           Add Rule
         </button>
-        {Modal_dal_ushel}
+        {ModalDalUshel}
       </div>
     </div>
   );
