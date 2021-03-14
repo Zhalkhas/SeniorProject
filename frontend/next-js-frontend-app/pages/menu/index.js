@@ -6,10 +6,10 @@ function Menu() {
   const router = useRouter();
 
   const items = {
-    Persons: 'assets/images/user.svg',
-    Cameras: 'assets/images/camera.svg',
-    Actions: 'assets/images/action.svg',
-    Configure: 'assets/images/configuration.svg',
+    Persons: 'assets/images/menu_logos/user.svg',
+    Cameras: 'assets/images/menu_logos/camera.svg',
+    Actions: 'assets/images/menu_logos/action.svg',
+    Configure: 'assets/images/menu_logos/configuration.svg',
   };
 
   const [logged, setLogged] = useState(true);

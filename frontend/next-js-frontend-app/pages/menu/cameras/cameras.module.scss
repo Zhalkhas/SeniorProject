@@ -1,0 +1,68 @@
+$auth-color: #61dafb;
+
+.camera_box {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #303338;
+
+    .cameras_header {
+        padding: 30px 0;
+        color: white;
+        background-color: $auth-color;
+        margin: 40px auto 0;
+        text-align: center;
+        width: 1200px;
+        height: 60px;
+        font-size: 60px;
+        border-radius: 10px 10px 0 0;
+    }
+  
+    button {
+      align-self: flex-start;
+      border: none;
+      background: $auth-color;
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 6px;
+      margin: 20px 20px 0 0;
+      width: 150px;
+      height: 40px;
+      font-size: 20px;
+      color: white;
+      margin-left: 25px;
+      outline: none;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+.camera_preview {
+    margin: 20px;
+
+    img {
+        cursor: pointer;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
