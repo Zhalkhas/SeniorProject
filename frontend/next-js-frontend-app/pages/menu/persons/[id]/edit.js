@@ -2,89 +2,123 @@ import { React, useState } from 'react';
 import styles from '../edit.module.scss';
 import RulesModal from '../../../../components/RulesModal';
 import Link from 'next/link';
-// import List from 'react-list-select/dist/list';
-// import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter, withRouter } from 'next/router';
+import axios from 'axios';
 
-function EditPerson() {
-  const default_image = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
-  // const router = useRouter();
+function EditPerson(props) {
+  const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
-  const list_of_cameras = {
-    url_1: 'camera 1',
-    url_2: 'camera 2',
+  const router = useRouter();
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  let fName = '';
+  let lName = '';
+
+  const id = props.router.query.id;
+
+  if (id !== -1) {
+    const persons = props.router.components['/menu/persons'].props.pageProps.persons;
+
+    for (let person of persons) {
+      if (+person.id === +id) {
+        fName = person.firstName;
+        lName = person.lastName;
+      }
+    }
+  }
+
+  const listOfCameras = {
+    'Floor Cam': '../../../assets/images/cams/cam_1.jpeg',
+    'Admin Office 1': '../../../assets/images/cams/cam_2.jpeg',
+    'Loading Dock Cam': '../../../assets/images/cams/cam_5.jpeg',
+    Backyard: '../../../assets/images/cams/cam_6.jpeg',
   };
 
-  const [list_of_rules, setList_of_rules] = useState({
-    rule_1: 'ne buhay Dolt',
-    rule_2: 'ne kuri Dolt',
-    rule_3: 'voobwe nichego ne delay Dolt',
-  });
+  const [rules, setRules] = useState([]);
 
-  const info = {
-    Name: 'skr',
-    Surname: 'bop',
-    Age: 21512,
-    Other: 'info',
-  };
+  const RulesSection = rules.map((rule, index) => (
+    <li key={index}>
+      <div className={styles.rule}>
+        <p>Rule: {rule}</p>
+        <div>
+          <button className={styles.button}>Edit</button>
+          <button
+            className={styles.button}
+            onClick={() => setRules([...rules.slice(0, index), ...rules.slice(index + 1)])}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </li>
+  ));
 
-  const [actions, setActions] = useState([
-    'Call Police',
-    'Alert Manager',
-    'Alert Security',
-    'Turn on Main Lights',
-    'Turn on Back Lot Lights',
-  ]);
-
-  const person_info = Object.entries(info).map(([key, value]) => {
-    return (
+  const InfoSection = (
+    <div>
       <p>
-        {key}: {value}
+        First name:{' '}
+        <input type='text' name='firstName' placeholder={fName} onChange={(e) => setFirstName(e.target.value)} />
       </p>
-    );
-  });
+      <p>
+        Last name:{' '}
+        <input type='text' name='lastName' placeholder={lName} onChange={(e) => setLastName(e.target.value)} />
+      </p>
+    </div>
+  );
 
   // modals state
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const Modal_dal_ushel = (
-    <RulesModal actions={actions} styles={styles} modal={modal} setModal={setModal} toggle={toggle} />
+  const dataTemplate = () => {
+    return {
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => {
+        return { day, isActive: false };
+      }),
+      timeFrom: null,
+      timeTo: null,
+    };
+  };
+
+  const ModalDalUshel = (
+    <RulesModal
+      addRule={() => {
+        setRules(['Monday, Friday, Sunday: from 10:00AM to 11:00AM']);
+        toggle();
+      }}
+      styles={styles}
+      modal={modal}
+      setModal={setModal}
+      toggle={toggle}
+      data={dataTemplate()}
+    />
   );
+
+  async function savePerson() {
+    const response = await axios.post('http://localhost:8888/api/persons', {
+      firstName,
+      lastName,
+    });
+
+    if (response.status === 200) {
+      await router.push('/menu/persons');
+    }
+  }
 
   // map cameras
 
-  const mapped_cameras = Object.entries(list_of_cameras).map(([key, value]) => {
+  const mappedCameras = Object.entries(listOfCameras).map(([key, value]) => {
     // допустим тут запрос-мапрос
-
     return (
       <>
-        <div key={key} className={styles.single_camera}>
-          <div className={styles.camera_preview}>
-            {/*camera preview*/}
-            {/*ниже key керек жок нарсе*/}
-            {key}
-          </div>
-          <p className='camera-name'>{value}</p>
+        <div className={styles.camera_preview}>
+          <img src={value} width={300} height={250} />
+          <p>{key}</p>
         </div>
       </>
-    );
-  });
-
-  const mapped_rules = Object.entries(list_of_rules).map(([key, value]) => {
-    return (
-      <li key={key}>
-        <div className={styles.rule}>
-          <p>
-            {key}: {value}
-          </p>
-          <div>
-            <button className={styles.button}>Edit</button>
-            <button className={styles.button}>Delete</button>
-          </div>
-        </div>
-      </li>
     );
   });
 
@@ -95,23 +129,30 @@ function EditPerson() {
       </Link>
       <h1 className={styles.person_header}>Person Info</h1>
       <div className={styles.info_box}>
-        <img className={styles.photo} src={default_image} />
+        {/* <button onClick={() => savePerson()} className={styles.button}>
+          Save
+        </button> */}
+        <img className={styles.photo} src={defaultImage} />
         <div className={styles.info_text}>
-          <p>{person_info}</p>
+          <p>{InfoSection}</p>
         </div>
+        <button onClick={() => savePerson()} className={styles.save_button}>
+          Add a person
+        </button>
       </div>
+
       <h1 className={styles.camera_header}>Cameras List</h1>
-      <div className={styles.camera_box}>{mapped_cameras}</div>
+      <div className={styles.camera_box}>{mappedCameras}</div>
       <h1 className={styles.rules_header}>Rules List</h1>
       <div className={styles.rules_box}>
-        <ul>{mapped_rules}</ul>
+        <ul>{RulesSection}</ul>
         <button className={styles.add_rule_button} onClick={toggle}>
           Add Rule
         </button>
-        {Modal_dal_ushel}
+        {ModalDalUshel}
       </div>
     </div>
   );
 }
 
-export default EditPerson;
+export default withRouter(EditPerson);
