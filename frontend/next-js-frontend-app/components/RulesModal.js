@@ -72,7 +72,7 @@ function RulesModal({ data, ...props }) {
         {fromToTime()}
       </ModalBody>
       <ModalFooter>
-        <Button className={'save'} onClick={saveModal}>
+        <Button className={'save'} onClick={props.addRule}>
           Save
         </Button>{' '}
         <Button color='secondary' onClick={props.toggle}>
