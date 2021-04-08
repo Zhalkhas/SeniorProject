@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: sp-backend-postgres
+    environment:
+      POSTGRES_PASSWORD: 'supersecret'
+      POSTGRES_DB: 'senior-project'
+    ports:
+      - '127.0.0.1:5432:5432'
+  backend:
+    build: .
+    image: sp-backend
+    container_name: sp-backend
+    links:
+      - postgres:postgres
+    environment:
+      SP_POSTGRES_HOST: postgres
+    depends_on:
+      - postgres
+    ports:
+      - '127.0.0.1:8888:8888'
+  frontend:
+    build: ../frontend/next-js-frontend-app/
+    image: sp-front
+    ports:
+      - '127.0.0.1:3000:3000'
