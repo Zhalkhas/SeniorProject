@@ -4,6 +4,7 @@ import RulesModal from '../../../../components/RulesModal';
 import Link from 'next/link';
 import { useRouter, withRouter } from 'next/router';
 import axios from 'axios';
+import ImageUpload from '../../../../components/ImageUpload';
 
 function EditPerson(props) {
   const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
@@ -78,8 +79,8 @@ function EditPerson(props) {
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => {
         return { day, isActive: false };
       }),
-      timeFrom: null,
-      timeTo: null,
+      timeFrom: '10:00',
+      timeTo: '11:00',
     };
   };
 
@@ -132,12 +133,14 @@ function EditPerson(props) {
         {/* <button onClick={() => savePerson()} className={styles.button}>
           Save
         </button> */}
-        <img className={styles.photo} src={defaultImage} />
+        <ImageUpload />
+
         <div className={styles.info_text}>
           <p>{InfoSection}</p>
         </div>
+
         <button onClick={() => savePerson()} className={styles.save_button}>
-          Add a person
+          Add
         </button>
       </div>
 

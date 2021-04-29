@@ -46,6 +46,8 @@ function RulesModal({ data, ...props }) {
 
     const [timeFrom, timeTo] = [localData.timeFrom, localData.timeTo];
 
+    console.log(timeFrom, timeTo);
+
     return (
       <div className='modal_time'>
         <label htmlFor='time_from'>From: </label>
