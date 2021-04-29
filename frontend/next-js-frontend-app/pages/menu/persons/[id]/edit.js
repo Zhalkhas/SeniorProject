@@ -13,6 +13,7 @@ function EditPerson(props) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
 
   let fName = '';
   let lName = '';
@@ -65,6 +66,10 @@ function EditPerson(props) {
       <p>
         Last name:{' '}
         <input type='text' name='lastName' placeholder={lName} onChange={(e) => setLastName(e.target.value)} />
+      </p>
+      <p>
+        Telegram username:{' '}
+        <input type='text' name='phone' placeholder={''} onChange={(e) => setPhone(e.target.value)} />
       </p>
     </div>
   );
